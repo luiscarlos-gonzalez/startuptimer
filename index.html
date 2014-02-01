@@ -12,20 +12,30 @@
 			font-family: bebasfont;
 			src: url(BebasNeue.otf);
 		}
+		html, body {
+			height: 100%;
+
+		}
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
 		body{
 			background-color: #A0D486;
+			background-image: url(monitos.png);
+			background-repeat: no-repeat;
+			background-position: left bottom;
 		}
 		#time_label{
 			color: white;
 			font-family: bebasfont;
 			font-size: 24em;
 			position: relative;
-			top: 0px;
+			top: 131px;
 			left: 0px;
 			margin: 0 auto;
 			display: block;
 			width: 930px;
-			margin-top: 75px;
 			text-shadow: 21px 0px 0px rgba(140, 193, 82, 1);
 		}
 		#startup_timer_label{
@@ -33,14 +43,34 @@
 			color: #8CC152;
 			font-size: 3em;
 			position: absolute;
-			top: 0px;
 			width: 190px;
 			display: block;
-
+			right: 0px;
+			top: 30px;
+			right: 100px;
+		}
+		#next_timer_label{
+			color: white;
+			font-family: bebasfont;
+			font-size: 3em;
+			position: absolute;
+			top: 30px;
+			left: 30px;
+			height: 55px;
+			margin: 0 auto;
+			display: block;
+			width: 115px;
+		}
+		#settings_button{
+			position: absolute;
+			top: 30px;
+			right: 30px;
 		}
 	</style>
 	<body>
 		<span id="startup_timer_label">Startup Timer</span>
+		<a href="" id="settings_button"><img src="settings_normal.png"></a>
+		<span id="next_timer_label">5:00:00</span>
 		<span id="time_label">1:00:00</span>
 	</body>
 </html>
