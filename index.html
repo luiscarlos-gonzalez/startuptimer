@@ -3,16 +3,17 @@
 	<title>
 		Startup Weekend Timer
 	</title>
-<script src="http://code.jquery.com/jquery.js"></script>
-<script src="http://hilios.github.io/jQuery.countdown/javascripts/jquery.countdown.min.js"></script>
+<script src="js/jquery-2.1.0.min.js"></script>
+<script src="js/jquery.countdown.min.js"></script>
+<script src="js/ion.sound.min.js"></script>
 	<style type="text/css">
 		@font-face{
 			font-family: startupfont;
-			src: url(LubalinGraphStd_Demi.otf);
+			src: url(fonts/LubalinGraphStd_Demi.otf);
 		}
 		@font-face{
 			font-family: bebasfont;
-			src: url(BebasNeue.otf);
+			src: url(fonts/BebasNeue.otf);
 		}
 		html, body {
 			height: 100%;
@@ -24,7 +25,7 @@
 		}
 		body{
 			background-color: #A0D486;
-			background-image: url(monitos.png);
+			background-image: url(img/monitos.png);
 			background-repeat: no-repeat;
 			background-position: left bottom;
 		}
@@ -75,28 +76,31 @@
 	</style>
 	<body>
 		<div id="nav-bar">
-			<span id="next_timer_label">5:00:00</span>
-			<a href="" id="settings_button"><img src="settings_normal.png"></a>
+			<span id="next_timer_label">01:00:00</span>
+			<a href="about.html" id="settings_button"><img src="img/settings_normal.png"></a>
 		</div>
 		<div>
 			<span id="startup_timer_label">Startup Timer</span>
 
-			<span id="time_label">1:00:00</span>
+			<span id="time_label">5:00:00</span>
 		</div>
 		<div id="getting-started"></div>
 		<script type="text/javascript">
-		  var now = new Date()
-		  var timer1 = now.setMinutes(now.getMinutes() + 1);
-		  var timer5 = now.setMinutes(now.getMinutes() + 5);
-		</script>
-		<script type="text/javascript">
-		  $('#time_label').countdown(timer1)    
-		  	   .on('update.countdown', function(event) {
-			    $(this).html(event.strftime('%M:%S'));
-			  })
-		  	   .on('finish', function(event) {
-			  	console.log("lol")
-		  	  });
+			$(document).ready(function(){
+				var now = new Date()
+				var timer1 = now.setMinutes(now.getMinutes() + 0);
+				var timer5 = now.setMinutes(now.getMinutes() + 4);
+				$.ionSound({
+				    sounds: [
+				        "applause"
+				    ]
+				});
+				$('#time_label').countdown(timer5, function(event) {
+				    	$(this).html(event.strftime('%M:%S'));
+					}).on('finish.countdown', function(event) {
+				  		$.ionSound.play("applause");
+			  	  	});
+			});
 		</script>
 	</body>
 </html>
