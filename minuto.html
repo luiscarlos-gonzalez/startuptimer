@@ -64,7 +64,8 @@
 			left: 30px;
 			height: 55px;
 			margin: 0 auto;
-			width: 75px;
+			display: block;
+			width: 115px;
 		}
 		#settings_button{
 			position: absolute;
@@ -79,26 +80,27 @@
 	</style>
 	<body>
 		<div id="nav-bar">
-			<a id="next_timer_label" href="minuto.html">1:00</a>
+			<a id="next_timer_label" href="index.html">5:00</a>
 			<span id="startup_timer_label">Startup Timer</span>
+			<span></span>
 			<a href="about.html" id="settings_button"><img src="img/settings_normal.png"></a>
 		</div>
 		<div>
 
-			<span id="time_label">5:00</span>
+			<span id="time_label">1:00</span>
 			<div>lalala</div>
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				var now = new Date()
-				var timer1 = now.setMinutes(now.getMinutes() + 0);
+				var timer1 = now.setMinutes(now.getMinutes() + 1);
 				var timer5 = now.setMinutes(now.getMinutes() + 5);
 				$.ionSound({
 				    sounds: [
 				        "applause"
 				    ]
 				});
-				$('#time_label').countdown(timer5, function(event) {
+				$('#time_label').countdown(timer1, function(event) {
 				    	$(this).html(event.strftime('%M:%S'));
 					}).on('finish.countdown', function(event) {
 				  		$.ionSound.play("applause");
