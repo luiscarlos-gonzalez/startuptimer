@@ -6,6 +6,7 @@
 <script src="js/jquery-2.1.0.min.js"></script>
 <script src="js/jquery.countdown.min.js"></script>
 <script src="js/ion.sound.min.js"></script>
+
 	<style type="text/css">
 		@font-face{
 			font-family: startupfont;
@@ -31,7 +32,7 @@
 			background-position-x: 100%;
 			background-size: 400px;
 		}
-		#time_label{
+		.time-label{
 			color: white;
 			font-family: bebasfont;
 			font-size: 24em;
@@ -77,6 +78,34 @@
 			background-color: rgb(85,172,47);
 			border: 5px solid rgb(155,208,128);
 		}
+		#start_timer {
+			font-family: startupfont;
+			color: #FFF;
+			font-size: 46px;
+			margin: 0 auto;
+			position: relative;
+			text-align: center;
+			padding-top: 20px;
+			display: block;
+			width: 50%;
+			height: 50px;
+			float: left;
+			background-color: rgb(255,86,67);
+		}
+		#stop_timer {
+			font-family: startupfont;
+			color: #FFF;
+			font-size: 46px;
+			margin: 0 auto;
+			position: relative;
+			text-align: center;
+			padding-top: 20px;
+			display: block;
+			width: 50%;
+			height: 50px;
+			float: left;
+			background-color: rgb(60,72,84);
+		}
 	</style>
 	<body>
 		<div id="nav-bar">
@@ -85,26 +114,71 @@
 			<a href="about.html" id="settings_button"><img src="img/settings_normal.png"></a>
 		</div>
 		<div>
-
-			<span id="time_label">5:00</span>
-			<div>lalala</div>
+			<span id="time_label" class="time-label">5:00</span>
+			<div>
+				<a id="start_timer">
+					START
+				</a>
+			</div>
+			<div>
+				<a id="stop_timer">
+					PAUSE
+				</a>
+			</div>
 		</div>
 		<script type="text/javascript">
-			$(document).ready(function(){
-				var now = new Date()
-				var timer1 = now.setMinutes(now.getMinutes() + 0);
-				var timer5 = now.setMinutes(now.getMinutes() + 5);
-				$.ionSound({
+		$(document).ready(function(){
+							$.ionSound({
 				    sounds: [
 				        "applause"
 				    ]
 				});
-				$('#time_label').countdown(timer5, function(event) {
-				    	$(this).html(event.strftime('%M:%S'));
-					}).on('finish.countdown', function(event) {
-				  		$.ionSound.play("applause");
-			  	  	});
-			});
+					  var now = new Date()
+					  var timer1 = now.setMinutes(now.getMinutes() + 1);
+					  var timer5 = now.setMinutes(now.getMinutes() + 4);
+			  $('#time_label').countdown(timer5)    
+			  	   .on('update.countdown', function(event) {
+				    $(this).html(event.strftime('%M:%S'));
+				  })
+			  	   .on('finish', function(event) {
+				  	$.ionSound.play("applause");
+			  	  });
+			  $('#time_label').countdown('stop');
+			  $('#start_timer').on("click", function(event){
+			  	start();
+			  });
+			  $('#stop_timer').on("click", function(event){
+			  	pause();
+			  });
+			  function start(){
+			  	$('#time_label').countdown('start');
+			  }
+
+			  function pause(){
+			  	if paused
+			  		reset();
+			  		$("stop_timer").html("RESET");
+			  		paused = false
+			  	else
+
+			  	$('#time_label').countdown('stop');
+			  	paused = true
+			  }
+
+			  function reset(){
+			  var now = new Date()
+			  var timer1 = now.setMinutes(now.getMinutes() + 1);
+			  var timer5 = now.setMinutes(now.getMinutes() + 4);
+			  	$('#time_label').attr("id")
+			  	$('#time_label').countdown(timer5)    
+				  	   .on('update.countdown', function(event) {
+					    $(this).html(event.strftime('%M:%S'));
+					  })
+				  	   .on('finish', function(event) {
+				  	  });
+				  }
+			  	$('#time_label').countdown('stop');
+		});
 		</script>
 	</body>
 </html>
