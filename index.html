@@ -87,7 +87,7 @@
 			text-align: center;
 			padding-top: 20px;
 			display: block;
-			width: 50%;
+			width: 100%;
 			height: 50px;
 			float: left;
 			background-color: rgb(255,86,67);
@@ -101,10 +101,18 @@
 			text-align: center;
 			padding-top: 20px;
 			display: block;
-			width: 50%;
+			width: 100%;
 			height: 50px;
 			float: left;
 			background-color: rgb(60,72,84);
+		}
+		.button{		
+			position: absolute;
+			bottom: 0px;
+			width: 50%;
+		}
+		#black-button{
+			left: 50%;
 		}
 	</style>
 	<body>
@@ -114,13 +122,13 @@
 			<a href="about.html" id="settings_button"><img src="img/settings_normal.png"></a>
 		</div>
 		<div>
-			<span id="time_label" class="time-label">5:00</span>
-			<div>
+			<span id="time_label" class="time-label">05:00</span>
+			<div class="button">
 				<a id="start_timer">
 					START
 				</a>
 			</div>
-			<div>
+			<div class="button" id="black-button">
 				<a id="stop_timer">
 					PAUSE
 				</a>
@@ -128,56 +136,62 @@
 		</div>
 		<script type="text/javascript">
 		$(document).ready(function(){
-							$.ionSound({
-				    sounds: [
-				        "applause"
-				    ]
+			$.ionSound({
+				sounds: [
+					"applause"
+				]
+			});
+			var tmpMinutes = "";
+			var tmpSeconds = "";
+			$('#start_timer').on("click", function(event){
+				if($('#stop_timer').html().trim() == "RESET"){
+					restart()
+				}else{
+					start();
+				}
+			});
+			$('#stop_timer').on("click", function(event){
+				if($(this).html().trim() == "PAUSE"){
+					pause();
+				}else if($(this).html().trim() == "RESET"){
+					pause();
+					reset();
+				}
+			});
+			function start(){
+				now = new Date();
+				timer5 = now.setMinutes(now.getMinutes() + 5);
+				$('#time_label').countdown(timer5, function(event){
+					if(event.type == "update"){
+						$('#time_label').html(event.strftime('%M:%S'));
+					}else if(event.type == "finish"){
+						$.ionSound.play("applause");
+					}else if(event.type == "stoped"){
+						tmpMinutes = event.offset.minutes;
+						tmpSeconds = event.offset.seconds;
+					}
 				});
-					  var now = new Date()
-					  var timer1 = now.setMinutes(now.getMinutes() + 1);
-					  var timer5 = now.setMinutes(now.getMinutes() + 4);
-			  $('#time_label').countdown(timer5)    
-			  	   .on('update.countdown', function(event) {
-				    $(this).html(event.strftime('%M:%S'));
-				  })
-			  	   .on('finish', function(event) {
-				  	$.ionSound.play("applause");
-			  	  });
-			  $('#time_label').countdown('stop');
-			  $('#start_timer').on("click", function(event){
-			  	start();
-			  });
-			  $('#stop_timer').on("click", function(event){
-			  	pause();
-			  });
-			  function start(){
-			  	$('#time_label').countdown('start');
-			  }
+			}
+			function restart(){
+				now = new Date();
+				timerRemaind = now.setSeconds(now.getSeconds() + (tmpMinutes * 60) + tmpSeconds);
+				$('#time_label').countdown(timerRemaind);
+				$('#time_label').countdown('start');
+			  	$("#stop_timer").html("PAUSE");
+			}
+			function pause(){
+			  	$("#stop_timer").html("RESET");
+				$('#time_label').countdown('pause');
+			}
 
-			  function pause(){
-			  	if paused
-			  		reset();
-			  		$("stop_timer").html("RESET");
-			  		paused = false
-			  	else
-
-			  	$('#time_label').countdown('stop');
-			  	paused = true
-			  }
-
-			  function reset(){
-			  var now = new Date()
-			  var timer1 = now.setMinutes(now.getMinutes() + 1);
-			  var timer5 = now.setMinutes(now.getMinutes() + 4);
-			  	$('#time_label').attr("id")
-			  	$('#time_label').countdown(timer5)    
-				  	   .on('update.countdown', function(event) {
-					    $(this).html(event.strftime('%M:%S'));
-					  })
-				  	   .on('finish', function(event) {
-				  	  });
-				  }
-			  	$('#time_label').countdown('stop');
+			function reset(){
+				var now = new Date()
+				var timer5 = now.setMinutes(now.getMinutes() + 5);
+				$('#time_label').countdown('pause');
+				$('#time_label').countdown(timer5);
+				$('#time_label').countdown('start');
+			  	$("#stop_timer").html("PAUSE");
+			}
 		});
 		</script>
 	</body>
