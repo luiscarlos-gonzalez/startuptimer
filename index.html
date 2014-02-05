@@ -5,7 +5,7 @@
 	</title>
 <script src="js/jquery-2.1.0.min.js"></script>
 <script src="js/jquery.countdown.min.js"></script>
-<script src="js/ion.sound.min.js"></script>
+<script src="js/cordova.js"></script>
 
 	<style type="text/css">
 		@font-face{
@@ -114,6 +114,11 @@
 		#black-button{
 			left: 50%;
 		}
+		@media only screen and (max-width: 320px){
+
+		}
+		@media only screen and (min-width: 321px){
+
 	</style>
 	<body>
 		<div id="nav-bar">
@@ -135,64 +140,63 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-		$(document).ready(function(){
-			$.ionSound({
-				sounds: [
-					"applause"
-				]
-			});
-			var tmpMinutes = "";
-			var tmpSeconds = "";
-			$('#start_timer').on("click", function(event){
-				if($('#stop_timer').html().trim() == "RESET"){
-					restart()
-				}else{
-					start();
-				}
-			});
-			$('#stop_timer').on("click", function(event){
-				if($(this).html().trim() == "PAUSE"){
-					pause();
-				}else if($(this).html().trim() == "RESET"){
-					pause();
-					reset();
-				}
-			});
-			function start(){
-				now = new Date();
-				timer5 = now.setMinutes(now.getMinutes() + 5);
-				$('#time_label').countdown(timer5, function(event){
-					if(event.type == "update"){
-						$('#time_label').html(event.strftime('%M:%S'));
-					}else if(event.type == "finish"){
-						$.ionSound.play("applause");
-					}else if(event.type == "stoped"){
-						tmpMinutes = event.offset.minutes;
-						tmpSeconds = event.offset.seconds;
+		document.addEventListener("deviceready", onDeviceReady, false);
+		function onDeviceReady() {
+			$(document).ready(function(){
+				var tmpMinutes = "";
+				var tmpSeconds = "";
+				var media = new Media("static/sounds/applause.ogg");
+				$('#start_timer').on("touchstart", function(event){
+					if($('#stop_timer').html().trim() == "RESET"){
+						restart()
+					}else{
+						start();
 					}
 				});
-			}
-			function restart(){
-				now = new Date();
-				timerRemaind = now.setSeconds(now.getSeconds() + (tmpMinutes * 60) + tmpSeconds);
-				$('#time_label').countdown(timerRemaind);
-				$('#time_label').countdown('start');
-			  	$("#stop_timer").html("PAUSE");
-			}
-			function pause(){
-			  	$("#stop_timer").html("RESET");
-				$('#time_label').countdown('pause');
-			}
+				$('#stop_timer').on("touchstart", function(event){
+					if($(this).html().trim() == "PAUSE"){
+						pause();
+					}else if($(this).html().trim() == "RESET"){
+						pause();
+						reset();
+					}
+				});
+				function start(){
+					now = new Date();
+					timer5 = now.setMinutes(now.getMinutes() + 5);
+					$('#time_label').countdown(timer5, function(event){
+						if(event.type == "update"){
+							$('#time_label').html(event.strftime('%M:%S'));
+						}else if(event.type == "finish"){
+							media.play();
+						}else if(event.type == "stoped"){
+							tmpMinutes = event.offset.minutes;
+							tmpSeconds = event.offset.seconds;
+						}
+					});
+				}
+				function restart(){
+					now = new Date();
+					timerRemaind = now.setSeconds(now.getSeconds() + (tmpMinutes * 60) + tmpSeconds);
+					$('#time_label').countdown(timerRemaind);
+					$('#time_label').countdown('start');
+				  	$("#stop_timer").html("PAUSE");
+				}
+				function pause(){
+				  	$("#stop_timer").html("RESET");
+					$('#time_label').countdown('pause');
+				}
 
-			function reset(){
-				var now = new Date()
-				var timer5 = now.setMinutes(now.getMinutes() + 5);
-				$('#time_label').countdown('pause');
-				$('#time_label').countdown(timer5);
-				$('#time_label').countdown('start');
-			  	$("#stop_timer").html("PAUSE");
-			}
-		});
+				function reset(){
+					var now = new Date()
+					var timer5 = now.setMinutes(now.getMinutes() + 5);
+					$('#time_label').countdown('pause');
+					$('#time_label').countdown(timer5);
+					$('#time_label').countdown('start');
+				  	$("#stop_timer").html("PAUSE");
+				}
+			});
+        }
 		</script>
 	</body>
 </html>
