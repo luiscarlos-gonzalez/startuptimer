@@ -25,16 +25,25 @@
 			color:rgb(117, 208, 78);
 			font-size: 4em;
 			margin: 0 auto;
-			position: absolute;
+			position: relative;
+			top: -54px;
+			display: block;
+			width: 125px;
 		}
 		#header{
 			background-color: rgb(224, 229, 233);
 			height: 100px;
 		}
+		#back-button{
+			position: relative;
+			top: 18px;
+			left: 15px;
+		}
 		#logo{
 			position: absolute;
 			right: 0px;
 			margin-right: 20px;
+			top: 8px;
 		}
 		#mini_linea{
 			width: 100%;
@@ -54,26 +63,129 @@
 			color: white;
 			font-family: bebasfont;
 			line-height: 57px;
+			margin: 0 auto;
+			display: block;
+			width: 46%;
 		}
 		.perfil{
 			width: 124px;
 			float: left;
-			margin-left: 40px;
-			margin-right: 40px;
+			margin-left: 20px;
+			margin-right: 20px;
+			font-family: bebasfont;
+			text-decoration: none;
+			font-size: 1.5em;
+			text-align: center;
+		}
+		.perfil a{
+			text-decoration: none;
+			color: #5C6652;
 		}
 		#perfiles{
 			background-color: rgb(224, 229, 233);
+			width: 984px;
+			margin: 0 auto;
+		}
+		#perfiles-container{
+			background-color: rgb(224, 229, 233);
+			padding-top: 40px;
+			padding-bottom: 40px;
+		}
+		#patrocinadores{
+			width: 940px;
+			margin: 0 auto;
+			padding: 20px;
+			line-height: 112px;
 		}
 		.patorcinador{
 			float: left;
 			margin-left: 50px;
 			margin-right: 50px;
+			height: 83px;
+		}
+		#green{
+			width: 984px;
+			text-align: center;
+			margin: 0 auto;
+			color: rgb(117, 208, 78);
+			font-family: startupfont;
+			font-size: 2em;
+			margin-bottom: 20px;
+		}
+		#gray{
+			color: #5C6652;
+			width: 984px;
+			text-align: center;
+			margin: 0 auto;
+			font-family: startupfont;
+			font-size: 1.5em;
+			margin-bottom: 20px;
+		}
+		.group:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+		#last-message{
+			background-color: rgb(224, 229, 233);
+			padding: 20px;
+		}
+		#last-message p {
+			font-family: bebasfont;
+			color: #5C6652;
+			font-size: 1.3em;
+		}
+		@media only screen and (min-width: 321px)  and (max-width:768px){
+			#perfiles{
+				width: 80%;
+			}
+			#patrocinadores{
+				width: 80%;
+				padding: 0px;
+			}
+			#green{
+				width: 100%;
+			}
+			#gray{
+				width: 100%;
+			}
+			#we_love{
+				width: 100%;
+				text-align: center;
+			}
+			.patorcinador{
+				height: 90px;
+			}
+		}
+		@media only screen and (max-width: 320px){
+			#perfiles{
+				width: 80%;
+			}
+			#patrocinadores{
+				width: 80%;
+				padding: 0px;
+			}
+			.patorcinador{
+				height: 90px;
+			}
+			#green{
+				width: 100%;
+			}
+			#gray{
+				width: 100%;
+			}
+			#we_love{
+				width: 100%;
+				text-align: center;
+			}
 		}
 	</style>
 	<body>
 		<section id="header">
-			<a href="index.html"><img src="img/back_normal.png" id="back_button"></a>
-			<img src="logo.png" id="logo">
+			<a id="back-button" href="index.html">
+				<img width="61" height="61" src="img/back_normal.png" id="back_button">
+			</a>
+			<img src="img/logo.png" id="logo">
 			<span id="about">ABOUT</span>
 			<span id="mini_linea"></span>
 		</section>
@@ -81,49 +193,56 @@
 			<img id="img_header" src="img/imgtodos.png"/>
 			<span id="we_love">WE MADE THIS FOR LOVE</span>
 		</section>
-		<div id="perfiles">
-			<div class="perfil">
-				<a href="http://twitter.com/djpechi">
-					<img src="img/pechi.png">
-					<span>@djPechi</span>
-				</a>
-			</div>
-			<div class="perfil">
-				<a href="http://twitter.com/rhino_">
-					<img src="img/gibran.png">
-					<span>@rhino_</span>
-				</a>
-			</div>
-			<div class="perfil">
-				<a href="http://twitter.com/kentverger">
-					<img src="img/kentverger.png">
-					<span>@kentverger</span>
-				</a>
-			</div>
-			<div class="perfil">
-				<a href="http://twitter.com/anaKarenART">
-					<img src="img/anakarenart.png">
-					<span>@anaKarenART</span>
-				</a>
-			</div>
-			<div class="perfil">
-				<a href="http://twitter.com/mackaber">
-					<img src="img/mackaberg.png">
-					<span>@mackaber</span>
-				</a>
-			</div>
-			<div class="perfil">
-				<a href="http://twitter.com/tonklis">
-					<img src="img/benjamin.png">
-					<span>@tonklis</span>
-				</a>
+		<div id="perfiles-container"> 
+			<p id="green">We are passionate about Startups & Startup Weekends.</p>
+			<p id="gray">This SW coaches made this exclusive App for Startup Weekends follow them!</p>
+			<div id="perfiles" class="group">
+				<div class="perfil">
+					<a href="http://twitter.com/djpechi">
+						<img src="img/pechi.png">
+						<span>@djPechi</span>
+					</a>
+				</div>
+				<div class="perfil">
+					<a href="http://twitter.com/Rhinno_o">
+						<img src="img/gibran.png">
+						<span>@Rhinno_o</span>
+					</a>
+				</div>
+				<div class="perfil">
+					<a href="http://twitter.com/kentverger">
+						<img src="img/kentverger.png">
+						<span>@kentverger</span>
+					</a>
+				</div>
+				<div class="perfil">
+					<a href="http://twitter.com/anaKarenART">
+						<img src="img/anakarenart.png">
+						<span>@anaKarenART</span>
+					</a>
+				</div>
+				<div class="perfil">
+					<a href="http://twitter.com/mackaber">
+						<img src="img/mackaberg.png">
+						<span>@mackaber</span>
+					</a>
+				</div>
+				<div class="perfil">
+					<a href="http://twitter.com/tonklis">
+						<img src="img/benjamin.png">
+						<span>@tonklis</span>
+					</a>
+				</div>
 			</div>
 		</div>
-		<section id="footer">
-			<div id="patrocinadores">
+		<section id="footer" class="group">
+			<div id="patrocinadores" class="group">
 				<a class="patorcinador" href="http://neubox.net"><img src="img/neubox.png"></a>
 				<a class="patorcinador" href="http://niumedia.mx"><img src="img/niumedia.png"></a>
-				<a class="patorcinador"href="http://neubox.net"><img src="img/in2teck.png"></a>
+				<a class="patorcinador"href="http://www.in2teck.com/"><img src="img/in2teck.png"></a>
+			</div>
+			<div id="last-message">
+				<p>If you want to talk with us or for more information: hello@startuptimer.com</p>
 			</div>
 		</section>
 	</body>
